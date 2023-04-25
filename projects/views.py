@@ -63,5 +63,5 @@ class NewProjectView(View):
 
 
 class NewTask(View):
-    form
+    pass
 
