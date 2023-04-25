@@ -1,6 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from users.models import Team
+from django.views import View
+
+from users.models import Team, Member, Membership
+
 
 @login_required(login_url='login')
 def homeView(request):
@@ -11,8 +14,31 @@ def homeView(request):
 def newTeamView(request):
     if request.method == 'POST':
         team_name = request.POST.get('name')
-        new_team = Team.objects.create_team(team_name, request.user)
+        new_team = Team.objects.create_team(team_name, Member.objects.get(user=request.user))
         new_team.save()
         redirect('/')
 
-    return render(request, 'main/newTeam.html')
+    context = {
+        'username': request.user.username
+    }
+
+    return render(request, 'main/newTeam.html', context)
+
+
+@login_required(login_url='login')
+def listTeamView(request):
+    context = {
+        'username': request.user.username,
+        'teams': Membership.objects.filter(member=Member.objects.get(user=request.user))
+    }
+    return render(request, 'main/list_of_team.html', context)
+
+
+@login_required(login_url='login')
+class ProjectView(View):
+
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass

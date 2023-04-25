@@ -1,11 +1,12 @@
 from django.urls import path
 
 
-from projects.views import homeView, newTeamView
+from projects.views import homeView, newTeamView, listTeamView
 
 app_name = 'projects'
 
 urlpatterns = [
     path('', homeView),
-    path('newTeam', newTeamView, name='newTeam')
+    path('newTeam', newTeamView, name='newTeam'),
+    path('listteam', listTeamView, name='listTeam')
 ]

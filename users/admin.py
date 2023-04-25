@@ -5,3 +5,4 @@ import users.models
 
 admin.site.register(users.models.Team)
 admin.site.register(users.models.Member)
+admin.site.register(users.models.Membership)
