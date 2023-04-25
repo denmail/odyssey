@@ -60,3 +60,8 @@ class NewProjectView(View):
 
             return HttpResponseRedirect('listTeam')
         return render(request, self.template_name, {'form': form})
+
+
+class NewTask(View):
+    form
+

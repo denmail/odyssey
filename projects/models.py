@@ -10,15 +10,23 @@ class Task(models.Model):
         return self.title
 
 
+class TasksGroup(models.Model):
+    title = models.CharField(max_length=200, default='title')
+    tasks = models.ManyToManyField(Task, default=None)
+
+    def __str__(self):
+        return self.title
+
+
 class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tasks = models.ManyToManyField(Task, default=None, null=True, blank=True)
+    tasks_groups = models.ManyToManyField(TasksGroup, )
 
     def __str__(self):
         return self.name
-
 
 
