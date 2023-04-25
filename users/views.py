@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from users.models import Member
+
 
 # Create your views here.
 @login_required(login_url='login')
@@ -23,6 +25,8 @@ def SignupPage(request):
 
             my_user = User.objects.create_user(uname, email, pass1)
             my_user.save()
+            my_member = Member.objects.create(user=my_user)
+            my_member.save()
             return redirect('/login')
 
     return render(request, 'users/register.html')
