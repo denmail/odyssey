@@ -1,15 +1,30 @@
+{% extends 'main/base.html' %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
+
+
+{% block content %}
 <a>{{ username }}</a>
-<ol>
-{% for i in teams %}
-    <li>{{ i.team }}</li>
-    <ol>
-    {% for j in i.team.projects.all %}
-        <li>{{ j }}</li>
-    {% endfor %}
-    </ol>
-{% endfor %}
-</ol>
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <ol>
+            {% for i in teams %}
+                <li><a href="team/{{ i.team }}">{{ i.team }}</a></li>
+            {% endfor %}
+            </ol>
+        </div>
+        <div class="col">
+            <ol>
+            {% for i in projects %}
+                <li><a href="{{ i.project }}">{{ i.project }}</a> </li>
+            {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,10 +1,15 @@
+{% extends 'main/base.html' %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
+
+{% block content %}
 <a>{{ username }}</a>
 <form method="post">
     {% csrf_token %}
     <input id="team_name" class="form-control" placeholder="team name" name="name">
     <button type="submit">Create</button>
 </form>
+
+{% endblock %}

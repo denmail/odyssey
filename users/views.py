@@ -34,12 +34,13 @@ def SignupPage(request):
 
 def LoginPage(request):
     if request.method == 'POST':
+        logout(request)
         username = request.POST.get('username')
         pass1 = request.POST.get('pass')
         user = authenticate(request, username=username, password=pass1)
         if user is not None:
             login(request, user)
-            return redirect('/home')
+            return redirect('/pr/listTeam')
         else:
             return HttpResponse("Username or Password is incorrect!!!")
 
